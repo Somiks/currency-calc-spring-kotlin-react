@@ -1,7 +1,7 @@
 import './Admin.css';
 import React, {Component} from 'react';
 import {withRouter} from "react-router-dom";
-import {Select, Button, Form, Input, message} from "antd";
+import {Button, Form, Input, message, Select} from "antd";
 import {CURRENCY_LIST} from "../../constants/const";
 import CurrencyCalculatorService from "../../service/CurrencyCalculatorService";
 
@@ -33,7 +33,7 @@ class Admin extends Component {
     componentDidMount() {
         this.currencyCalculatorService.listRates().then(response => {
             this.setState({
-                rates : response
+                rates: response
             });
         });
     }
@@ -49,7 +49,7 @@ class Admin extends Component {
             const rates = this.state.rates;
             rates.push(response);
             this.setState({
-                rates : rates
+                rates: rates
             });
         });
     };
@@ -95,7 +95,7 @@ class Admin extends Component {
     };
 
     validateCurrency = (value) => {
-       if (!value) {
+        if (!value) {
             return {
                 validateStatus: 'error'
             }
@@ -134,10 +134,11 @@ class Admin extends Component {
         this.currencyCalculatorService.removeRate(id).then(response => {
             const filteredList = this.state.rates.filter(rate => rate.id !== id);
             this.setState({
-                rates : filteredList
+                rates: filteredList
             });
         });
     };
+
     render() {
         const currenciesItems = CURRENCY_LIST.map(currency => <Option
             key={currency}>{currency}</Option>);
@@ -152,7 +153,6 @@ class Admin extends Component {
                     </Button>
                 </div>
             </div>
-
         );
         return (
             <div className="admin-container">
@@ -196,7 +196,7 @@ class Admin extends Component {
                                     autoComplete="off"
                                     placeholder="0.1"
                                     name="fee"
-                                    onChange={(event) => this.validateInput(event.target.name, event.target.value,  this.validateFee)}
+                                    onChange={(event) => this.validateInput(event.target.name, event.target.value, this.validateFee)}
                                 />
                             </FormItem>
                             <FormItem>
