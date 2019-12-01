@@ -1,6 +1,8 @@
 .rates-table {
     display: table;
     width: 100px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .rates-table > .row {
     display: table-row;

@@ -95,7 +95,6 @@ class Admin extends Component {
     };
 
     validateCurrency = (value) => {
-        console.log("validateCurrency - " + value);
        if (!value) {
             return {
                 validateStatus: 'error'

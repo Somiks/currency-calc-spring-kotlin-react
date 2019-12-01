@@ -21,14 +21,12 @@ class Main extends Component {
     }
 
     changeValueAndCalculateAmount = (key, value) => {
-        console.log("change value - " + key + " = " + value);
         this.setState({
             [key]: value
         }, this.calculateAmount);
     };
 
     calculateAmount = () => {
-
         const amount = this.state.amount.replace(/\D/g,'');
         if (amount && this.state.fromCurrency && this.state.toCurrency) {
 
