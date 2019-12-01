@@ -5,7 +5,6 @@ import com.bilderlings.homework.model.RateEntity
 import com.bilderlings.homework.proxy.FixerRatesProxy
 import com.bilderlings.homework.repository.CurrencyCalculatorRepository
 import com.bilderlings.homework.service.CurrencyCalculatorService
-import com.google.common.util.concurrent.RateLimiter
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service

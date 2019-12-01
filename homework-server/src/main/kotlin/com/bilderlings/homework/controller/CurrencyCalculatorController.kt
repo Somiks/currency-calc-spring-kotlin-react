@@ -2,7 +2,6 @@ package com.bilderlings.homework.controller
 
 import com.bilderlings.homework.model.RateEntity
 import com.bilderlings.homework.service.CurrencyCalculatorService
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -31,6 +30,7 @@ class CurrencyCalculatorController(
     fun addRate(@Valid @RequestBody rateEntity: RateEntity): RateEntity {
         return currencyCalculatorService.addOrUpdateRate(rateEntity);
     }
+
     @PostMapping("/remove-rate/{id}")
     fun addRate(@PathVariable id: Long): String {
         currencyCalculatorService.removeRate(id)

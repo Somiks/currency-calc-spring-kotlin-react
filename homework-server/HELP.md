@@ -8,9 +8,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 
 ## Deployment
-To start up application on docker container 
+To deploy application on docker container 
 ```
-    docker-compose up
+docker-compose up
 ```
 
 ## Start App
