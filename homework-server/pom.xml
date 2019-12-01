@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bilderlings</groupId>
-	<artifactId>homework</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>homework-server</artifactId>
+	<version>v1</version>
 	<name>homework</name>
 	<description>Demo project for Spring Boot</description>
 
