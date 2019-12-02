@@ -2,6 +2,9 @@
 
 Currency calculator for bilderlings homework
 
+## Question?
+What is your preferred way to deploy applications? Do you prefer to chose single jar deployment or separate way? 
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
