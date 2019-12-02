@@ -3,7 +3,7 @@
 Currency calculator for bilderlings homework
 
 ## Question?
-What is your preferred way to deploy applications? Do you prefer to chose single jar deployment or separate way? 
+What is your preferred way to deploy applications? Do you prefer to choose single jar deployment or separate way? 
 
 ## Getting Started
 
