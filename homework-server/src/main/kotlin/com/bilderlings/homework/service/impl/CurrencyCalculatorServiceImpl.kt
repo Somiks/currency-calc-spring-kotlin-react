@@ -20,10 +20,10 @@ class CurrencyCalculatorServiceImpl(
     override fun getCalculatedRate(fromCurrency: String, toCurrency: String, amount: BigDecimal): BigDecimal {
         val rateAmount = fixerRatesProxy.getRate(fromCurrency, toCurrency);
         return currencyCalculatorRepository
-                .findBy(fromCurrency, toCurrency)
-                .map { rate -> amount.multiply(rateAmount.minus(rate.fee)) }
-                .orElseGet {
-                    logger.warn("No fee specified for $fromCurrency and $toCurrency")
+                .findBy(fromCurrency, toCurrency)?.let {
+                    amount.multiply(rateAmount.minus(it.fee))
+                } ?: run {
+                    logger.warn("No fee specified for $fromCurrency and $toCurrency");
                     amount.multiply(rateAmount)
                 }
     }
@@ -39,11 +39,9 @@ class CurrencyCalculatorServiceImpl(
     override fun addOrUpdateRate(rateEntity: RateEntity): RateEntity {
         return currencyCalculatorRepository
                 .findBy(rateEntity.fromCurrency, rateEntity.toCurrency)
-                .map { rateFromDB ->
-                    currencyCalculatorRepository.save(RateEntityBuilder().build(rateFromDB.id, rateEntity))
-                }.orElseGet {
-                    currencyCalculatorRepository.save(rateEntity);
-                }
+                ?.let {
+                    currencyCalculatorRepository.save(RateEntityBuilder().build(it.id, rateEntity))
+                } ?: currencyCalculatorRepository.save(rateEntity)
     }
 
 }

@@ -10,5 +10,5 @@ import java.util.*
 interface CurrencyCalculatorRepository : JpaRepository<RateEntity, Long> {
 
     @Query("FROM RateEntity WHERE fromCurrency = ?1 AND toCurrency = ?2")
-    fun findBy(fromCurrency: String, toCurrency: String): Optional<RateEntity>
+    fun findBy(fromCurrency: String, toCurrency: String): RateEntity?
 }

@@ -14,7 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.web.client.RestClientException
 import java.math.BigDecimal
 import java.math.RoundingMode
-import java.util.*
 
 
 @SpringBootTest
@@ -35,9 +34,8 @@ class CurrencyCalculatorServiceTest {
         val toCurrency = "CHF"
         val rateFromFixer = BigDecimal(0.9)
         val rateEntity = RateEntity(1, fromCurrency, toCurrency, BigDecimal(0.1))
-        val fee = Optional.of(rateEntity)
         val expectedResult = BigDecimal(800)
-        validateCalculation(fromCurrency, toCurrency, rateFromFixer, fee, expectedResult)
+        validateCalculation(fromCurrency, toCurrency, rateFromFixer, rateEntity, expectedResult)
     }
 
 
@@ -47,9 +45,8 @@ class CurrencyCalculatorServiceTest {
         val toCurrency = "CHF"
         val rateFromFixer = BigDecimal(0.9)
         val rateEntity = RateEntity(1, fromCurrency, toCurrency, BigDecimal(0.01))
-        val fee = Optional.of(rateEntity)
         val expectedResult = BigDecimal(890)
-        validateCalculation(fromCurrency, toCurrency, rateFromFixer, fee, expectedResult)
+        validateCalculation(fromCurrency, toCurrency, rateFromFixer, rateEntity, expectedResult)
     }
 
 
@@ -59,14 +56,14 @@ class CurrencyCalculatorServiceTest {
         val toCurrency = "CHF"
         val rateFromFixer = BigDecimal(0.9)
         val expectedResult = BigDecimal(900)
-        validateCalculation(fromCurrency, toCurrency, rateFromFixer, Optional.empty(), expectedResult)
+        validateCalculation(fromCurrency, toCurrency, rateFromFixer, null, expectedResult)
     }
 
     private fun validateCalculation(
             fromCurrency: String,
             toCurrency: String,
             rateFromFixer: BigDecimal,
-            fee: Optional<RateEntity>,
+            fee: RateEntity?,
             expectedResult: BigDecimal) {
         `when`(fixerRatesProxy.getRate(fromCurrency, toCurrency)).thenReturn(rateFromFixer)
         `when`(currencyCalculatorRepository.findBy(fromCurrency, toCurrency)).thenReturn(fee)
@@ -81,7 +78,7 @@ class CurrencyCalculatorServiceTest {
 
         `when`(fixerRatesProxy.getRate(fromCurrency, toCurrency)).thenThrow(RestClientException("Rest exception"))
 
-        `when`(currencyCalculatorRepository.findBy(fromCurrency, toCurrency)).thenReturn(Optional.empty())
+        `when`(currencyCalculatorRepository.findBy(fromCurrency, toCurrency)).thenReturn(null)
 
         assertThrows(RestClientException::class.java) {
             currencyCalculatorService.getCalculatedRate(fromCurrency, toCurrency, BigDecimal(1000))
