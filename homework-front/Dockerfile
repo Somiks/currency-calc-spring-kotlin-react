@@ -6,12 +6,17 @@ FROM node:12.4.0-alpine as build
 # commands.
 WORKDIR /app
 
+
+
+
+
 # Copy the package.json as well as the package-lock.json and install
 # the dependencies. This is a separate step so the dependencies
 # will be cached unless changes to one of those two files
 # are made.
 COPY package.json package-lock.json ./
 RUN npm install
+
 
 # Copy the main application
 COPY . ./
