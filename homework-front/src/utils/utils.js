@@ -7,4 +7,5 @@ export const request = (options) => {
     options = Object.assign({}, defaults, options);
 test2 test22 test23
     return fetch(options.url, options).then(res => res.json());
+test1 test11 test12
 };
